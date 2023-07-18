@@ -25,7 +25,7 @@ func Websites(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 	}
 
 	websitesObj, ok := ctx.Obj[string(websiteSpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no websites
 	}
 	for _, website := range maps.SafeInterfaceToStringKeys(websitesObj) {
@@ -42,7 +42,7 @@ func Websites(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 		getter := web.Get()
 		webId := getter.Id()
 		if len(webId) == 0 {
-			return fmt.Errorf("Website `%s` not found", getter.Name())
+			return fmt.Errorf("website `%s` not found", getter.Name())
 		}
 
 		// set repository path
@@ -75,7 +75,7 @@ func Websites(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 
 			// create entry if empty
 			linksPath := httpPath.Versioning().Links().String()
-			if _, exists := urlIndex[linksPath]; exists == false {
+			if _, exists := urlIndex[linksPath]; !exists {
 				//TODO: Add capacity to all makes, make variable in specs for default capacity
 				urlIndex[linksPath] = make([]string, 0)
 			}
@@ -90,7 +90,7 @@ func Websites(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 			}
 
 			// add value (path to object) to the list
-			if skip == false {
+			if !skip {
 				urlIndex[linksPath] = append(urlIndex[linksPath].([]string), value)
 			}
 		}

@@ -22,7 +22,7 @@ func Functions(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 	}
 
 	funcObj, ok := ctx.Obj[string(functionSpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no functions
 	}
 
@@ -38,7 +38,7 @@ func Functions(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 		}
 
 		if len(_func.Get().Id()) == 0 {
-			return fmt.Errorf("Function `%s` not found", _func.Get().Name())
+			return fmt.Errorf("function `%s` not found", _func.Get().Name())
 		}
 
 		getter := _func.Get()
@@ -53,7 +53,7 @@ func Functions(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 		}
 
 		linksPath := indexPath.Versioning().Links().String()
-		if _, exists := urlIndex[linksPath]; exists == false {
+		if _, exists := urlIndex[linksPath]; !exists {
 			urlIndex[linksPath] = make([]string, 0)
 		}
 
@@ -65,7 +65,7 @@ func Functions(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 			}
 		}
 
-		if skip == false {
+		if !skip {
 			urlIndex[linksPath] = append(urlIndex[linksPath].([]string), tnsPath.String())
 		}
 
@@ -87,7 +87,7 @@ func Functions(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 
 			linksPath := httpPath.Versioning().Links().String()
 			// create entry if empty
-			if _, exists := urlIndex[linksPath]; exists == false {
+			if _, exists := urlIndex[linksPath]; !exists {
 				urlIndex[linksPath] = make([]string, 0)
 			}
 
@@ -101,7 +101,7 @@ func Functions(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 			}
 
 			// add value (path to object) to the list
-			if skip == false {
+			if !skip {
 				urlIndex[linksPath] = append(urlIndex[linksPath].([]string), tnsPath.String())
 			}
 		}

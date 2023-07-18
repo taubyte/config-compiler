@@ -31,7 +31,7 @@ func Databases(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 	}
 
 	dbObj, ok := ctx.Obj[string(databaseSpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no databases
 	}
 
@@ -48,7 +48,7 @@ func Databases(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 
 		id := db.Get().Id()
 		if len(id) == 0 {
-			return fmt.Errorf("Database `%s` not found", db.Get().Name())
+			return fmt.Errorf("database `%s` not found", db.Get().Name())
 		}
 
 		tnsPath, err := databaseSpec.Tns().IndexValue(ctx.Branch, ctx.ProjectId, ctx.AppId, id)
@@ -57,7 +57,7 @@ func Databases(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 		}
 
 		linksPath := databaseSpec.Tns().IndexPath(ctx.ProjectId, ctx.AppId, db.Get().Name()).Versioning().Links().String()
-		if _, exists := urlIndex[linksPath]; exists == false {
+		if _, exists := urlIndex[linksPath]; !exists {
 			urlIndex[linksPath] = make([]string, 0)
 		}
 
@@ -69,7 +69,7 @@ func Databases(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 			}
 		}
 
-		if skip == false {
+		if !skip {
 			urlIndex[linksPath] = append(urlIndex[linksPath].([]string), tnsPath.String())
 		}
 

@@ -24,7 +24,7 @@ func Libraries(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 	}
 
 	libObj, ok := ctx.Obj[string(librarySpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no libraries
 	}
 
@@ -41,7 +41,7 @@ func Libraries(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 
 		getter := lib.Get()
 		if len(getter.Id()) == 0 {
-			return fmt.Errorf("Library `%s` not found", getter.Name())
+			return fmt.Errorf("library `%s` not found", getter.Name())
 		}
 
 		// set repository path
@@ -65,7 +65,7 @@ func Libraries(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 		}
 
 		linksPath := wasmPath.Versioning().Links().String()
-		if _, exists := urlIndex[linksPath]; exists == false {
+		if _, exists := urlIndex[linksPath]; !exists {
 			urlIndex[linksPath] = make([]string, 0)
 		}
 
@@ -77,13 +77,13 @@ func Libraries(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 			}
 		}
 
-		if skip == false {
+		if !skip {
 			urlIndex[linksPath] = append(urlIndex[linksPath].([]string), tnsPath.String())
 		}
 
 		// TODO: SPECS
 		libIndex := librarySpec.Tns().NameIndex(libraryId)
-		if _, exists := urlIndex[libIndex.String()]; exists == false {
+		if _, exists := urlIndex[libIndex.String()]; !exists {
 			urlIndex[libIndex.String()] = getter.Name()
 		}
 	}

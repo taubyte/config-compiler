@@ -22,7 +22,7 @@ func SmartOps(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 	}
 
 	smartOpObj, ok := ctx.Obj[string(smartOpSpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no smartOps
 	}
 
@@ -53,7 +53,7 @@ func SmartOps(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 		}
 
 		linksPath := indexPath.Versioning().Links().String()
-		if _, exists := urlIndex[linksPath]; exists == false {
+		if _, exists := urlIndex[linksPath]; !exists {
 			urlIndex[linksPath] = make([]string, 0)
 		}
 
@@ -64,7 +64,7 @@ func SmartOps(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 			}
 		}
 
-		if skip == false {
+		if !skip {
 			urlIndex[linksPath] = append(urlIndex[linksPath].([]string), tnsPath.String())
 		}
 	}

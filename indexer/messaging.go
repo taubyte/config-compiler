@@ -22,7 +22,7 @@ func Messaging(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 	}
 
 	msgObj, ok := ctx.Obj[string(messagingSpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no msgs
 	}
 
@@ -41,7 +41,7 @@ func Messaging(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 			return fmt.Errorf("Messaging `%s` not found", msg.Get().Name())
 		}
 
-		if msg.Get().WebSocket() == false {
+		if !msg.Get().WebSocket() {
 			continue
 		}
 
@@ -61,7 +61,7 @@ func Messaging(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 		}
 
 		// create entry if empty
-		if _, exists := urlIndex[wsPath.String()]; exists == false {
+		if _, exists := urlIndex[wsPath.String()]; !exists {
 			urlIndex[wsPath.String()] = make([]string, 0)
 		}
 
@@ -75,7 +75,7 @@ func Messaging(ctx *IndexContext, project projectSchema.Project, urlIndex map[st
 		}
 
 		// add value (path to object) to the list
-		if skip == false {
+		if !skip {
 			urlIndex[wsPath.String()] = append(urlIndex[wsPath.String()].([]string), tnsPath.String())
 		}
 	}

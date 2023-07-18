@@ -10,8 +10,6 @@ import (
 )
 
 var (
-	//go:embed domain_private.key
-	domainValPrivateKeyData []byte
 	//go:embed domain_public.key
 	domainValPublicKeyData []byte
 )
@@ -24,7 +22,7 @@ func (ctx *IndexContext) validateDomain(fqdn string) error {
 		ctx.ValidDomains = []string{}
 	}
 
-	if slices.Contains(ctx.ValidDomains, fqdn) == true {
+	if slices.Contains(ctx.ValidDomains, fqdn) {
 		return nil
 	}
 

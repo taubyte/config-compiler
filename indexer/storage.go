@@ -23,7 +23,7 @@ func Storages(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 	}
 
 	storObj, ok := ctx.Obj[string(storageSpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no storages
 	}
 
@@ -40,7 +40,7 @@ func Storages(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 
 		getter := store.Get()
 		if len(getter.Id()) == 0 {
-			return fmt.Errorf("Storage `%s` not found", store.Get().Name())
+			return fmt.Errorf("storage `%s` not found", store.Get().Name())
 		}
 
 		indexPath := storageSpec.Tns().IndexPath(ctx.ProjectId, ctx.AppId, getter.Name())
@@ -50,7 +50,7 @@ func Storages(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 		}
 
 		linksPath := indexPath.Versioning().Links().String()
-		if _, exists := urlIndex[linksPath]; exists == false {
+		if _, exists := urlIndex[linksPath]; !exists {
 			urlIndex[linksPath] = make([]string, 0)
 		}
 
@@ -62,7 +62,7 @@ func Storages(ctx *IndexContext, project projectSchema.Project, urlIndex map[str
 			}
 		}
 
-		if skip == false {
+		if !skip {
 			urlIndex[linksPath] = append(urlIndex[linksPath].([]string), tnsPath.String())
 		}
 

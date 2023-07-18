@@ -19,7 +19,7 @@ func Domains(ctx *IndexContext, project projectSchema.Project, urlIndex map[stri
 	}
 
 	domObj, ok := ctx.Obj[string(domainSpec.PathVariable)]
-	if ok == false {
+	if !ok {
 		return nil // This shouldn't be breaking,  it just means there are no domains
 	}
 
@@ -35,13 +35,13 @@ func Domains(ctx *IndexContext, project projectSchema.Project, urlIndex map[stri
 		}
 
 		if len(dom.Get().Id()) == 0 {
-			return fmt.Errorf("Domain `%s` not found", dom.Get().Name())
+			return fmt.Errorf("domain `%s` not found", dom.Get().Name())
 		}
 
 		fqdn := dom.Get().FQDN()
 		err = ctx.validateDomain(fqdn)
 		if err != nil {
-			return fmt.Errorf("Domain `%s` has invalid fqdn `%s`: %v", dom.Get().Name(), fqdn, err)
+			return fmt.Errorf("domain `%s` has invalid fqdn `%s`: %v", dom.Get().Name(), fqdn, err)
 		}
 
 		indexPath, err := domainSpec.Tns().BasicPath(fqdn)
