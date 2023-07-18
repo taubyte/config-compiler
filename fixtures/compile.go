@@ -1,9 +1,9 @@
 package fixtures
 
 import (
-	commonTest "bitbucket.org/taubyte/dreamland-test/common"
-	"bitbucket.org/taubyte/dreamland/common"
 	"github.com/taubyte/config-compiler/compile"
+	"github.com/taubyte/dreamland/core/common"
+	commonTest "github.com/taubyte/dreamland/helpers"
 	"github.com/taubyte/go-project-schema/project"
 )
 

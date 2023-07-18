@@ -9,7 +9,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 
-	commonTest "bitbucket.org/taubyte/dreamland-test/common"
+	commonTest "github.com/taubyte/dreamland/helpers"
 	"golang.org/x/crypto/ssh"
 
 	"github.com/google/go-github/v32/github"

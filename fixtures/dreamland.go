@@ -1,7 +1,7 @@
 package fixtures
 
 import (
-	dreamlandRegistry "bitbucket.org/taubyte/dreamland/registry"
+	dreamlandRegistry "github.com/taubyte/dreamland/core/registry"
 )
 
 func init() {

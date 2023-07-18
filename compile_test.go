@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	commonTest "bitbucket.org/taubyte/dreamland-test/common"
-	gitTest "bitbucket.org/taubyte/dreamland-test/git"
 	"github.com/spf13/afero"
 	"github.com/taubyte/config-compiler/compile"
 	"github.com/taubyte/config-compiler/internal/fixtures"
+	commonTest "github.com/taubyte/dreamland/helpers"
+	gitTest "github.com/taubyte/dreamland/helpers/git"
 	projectLib "github.com/taubyte/go-project-schema/project"
 	"github.com/taubyte/utils/maps"
 )

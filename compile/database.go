@@ -10,7 +10,7 @@ import (
 func database(name string, application string, project projectSchema.Project) (_id string, returnMap map[string]interface{}, err error) {
 	iFace, err := project.Database(name, application)
 	if err != nil {
-		return "", nil, fmt.Errorf("Opening Database( %s/`%s` ) failed with: %v", application, name, err)
+		return "", nil, fmt.Errorf("opening Database( %s/`%s` ) failed with: %v", application, name, err)
 	}
 
 	getter := iFace.Get()
@@ -18,7 +18,7 @@ func database(name string, application string, project projectSchema.Project) (_
 
 	size, err := units.ParseStrictBytes(getter.Size())
 	if err != nil {
-		return "", nil, fmt.Errorf("Database( %s/`%s` ): converting size `%s` failed with: %v", application, name, getter.Size(), err)
+		return "", nil, fmt.Errorf("database( %s/`%s` ): converting size `%s` failed with: %v", application, name, getter.Size(), err)
 	}
 
 	returnMap = map[string]interface{}{
@@ -39,7 +39,7 @@ func database(name string, application string, project projectSchema.Project) (_
 
 	err = attachSmartOpsFromTags(returnMap, _tags, application, project, "")
 	if err != nil {
-		return "", nil, fmt.Errorf("Database( %s/`%s` ): Getting smartOps failed with: %v", application, name, err)
+		return "", nil, fmt.Errorf("database( %s/`%s` ): Getting smartOps failed with: %v", application, name, err)
 	}
 
 	if getter.Secret() {

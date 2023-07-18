@@ -13,7 +13,7 @@ import (
 func function(name string, application string, project projectSchema.Project) (_id string, returnMap map[string]interface{}, err error) {
 	iFace, err := project.Function(name, application)
 	if err != nil {
-		return "", nil, fmt.Errorf("Opening Function( %s/`%s` ) failed with: %v", application, name, err)
+		return "", nil, fmt.Errorf("opening Function( %s/`%s` ) failed with: %v", application, name, err)
 	}
 
 	getter := iFace.Get()
@@ -27,12 +27,12 @@ func function(name string, application string, project projectSchema.Project) (_
 
 	_timeout, err := time.ParseDuration(getter.Timeout())
 	if err != nil {
-		return "", nil, fmt.Errorf("Function( %s/`%s` ): converting time `%s` failed with: %v", application, name, getter.Timeout(), err)
+		return "", nil, fmt.Errorf("function( %s/`%s` ): converting time `%s` failed with: %v", application, name, getter.Timeout(), err)
 	}
 
 	_memory, err := units.ParseStrictBytes(getter.Memory())
 	if err != nil {
-		return "", nil, fmt.Errorf("Function( %s/`%s` ): converting memory `%s` failed with: %v", application, name, getter.Memory(), err)
+		return "", nil, fmt.Errorf("function( %s/`%s` ): converting memory `%s` failed with: %v", application, name, getter.Memory(), err)
 	}
 
 	source := getter.Source()
@@ -54,7 +54,7 @@ func function(name string, application string, project projectSchema.Project) (_
 
 	err = attachSmartOpsFromTags(returnMap, _tags, application, project, library)
 	if err != nil {
-		return "", nil, fmt.Errorf("Function( %s/`%s` ): Getting smartOps failed with: %v", application, name, err)
+		return "", nil, fmt.Errorf("function( %s/`%s` ): Getting smartOps failed with: %v", application, name, err)
 	}
 
 	if len(library) > 0 {
@@ -71,7 +71,7 @@ func function(name string, application string, project projectSchema.Project) (_
 	if len(_domains) > 0 {
 		domIDs, err := getDomIDs(_domains, application, project)
 		if err != nil {
-			return "", nil, fmt.Errorf("Function( %s/`%s` ): Getting domains failed with: %v", application, name, err)
+			return "", nil, fmt.Errorf("function( %s/`%s` ): Getting domains failed with: %v", application, name, err)
 		}
 		if len(domIDs) > 0 {
 			returnMap["domains"] = domIDs

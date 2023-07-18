@@ -3,7 +3,7 @@ package fixtures
 import (
 	"fmt"
 
-	"bitbucket.org/taubyte/dreamland/common"
+	"github.com/taubyte/dreamland/core/common"
 	"github.com/taubyte/go-project-schema/project"
 )
 

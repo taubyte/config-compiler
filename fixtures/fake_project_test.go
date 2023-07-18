@@ -3,11 +3,11 @@ package fixtures
 import (
 	"testing"
 
-	commonDreamland "bitbucket.org/taubyte/dreamland/common"
-	dreamland "bitbucket.org/taubyte/dreamland/services"
-	_ "bitbucket.org/taubyte/tns-p2p-client"
-	_ "bitbucket.org/taubyte/tns/service"
+	commonDreamland "github.com/taubyte/dreamland/core/common"
+	dreamland "github.com/taubyte/dreamland/core/services"
 	commonIface "github.com/taubyte/go-interfaces/common"
+	_ "github.com/taubyte/odo/clients/p2p/tns"
+	_ "github.com/taubyte/odo/protocols/tns/service"
 )
 
 func TestFakeProject(t *testing.T) {

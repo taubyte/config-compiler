@@ -3,10 +3,10 @@ package compiler
 import (
 	"testing"
 
-	commonDreamland "bitbucket.org/taubyte/dreamland/common"
-	dreamland "bitbucket.org/taubyte/dreamland/services"
 	"github.com/taubyte/config-compiler/compile"
 	TestFixtures "github.com/taubyte/config-compiler/internal/fixtures"
+	commonDreamland "github.com/taubyte/dreamland/core/common"
+	dreamland "github.com/taubyte/dreamland/core/services"
 	commonIface "github.com/taubyte/go-interfaces/common"
 	"github.com/taubyte/go-interfaces/services/tns"
 	projectSchema "github.com/taubyte/go-project-schema/project"

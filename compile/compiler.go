@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"os"
 	"strconv"
 
-	"bitbucket.org/taubyte/mycelium/logfile"
 	"github.com/spf13/afero"
 	"github.com/taubyte/config-compiler/decompile"
 	"github.com/taubyte/config-compiler/ifaces"
@@ -19,14 +19,10 @@ type compiler struct {
 	ctx    indexer.IndexContext
 	index  map[string]interface{}
 	post   []func() (err error)
-	log    *logfile.File
+	log    *os.File
 	config *Config
 
 	dev bool
-}
-
-type result struct {
-	data map[string]interface{}
 }
 
 type Option func(*compiler) error
@@ -41,16 +37,16 @@ type Config struct {
 
 func CompilerConfig(project projectSchema.Project, meta patrick.Meta) (*Config, error) {
 	if project == nil {
-		return nil, errors.New("Project is nil")
+		return nil, errors.New("project is nil")
 	}
 
 	if meta.Repository.ID == 0 {
-		return nil, errors.New("RepoId is nil")
+		return nil, errors.New("repoId is nil")
 	}
 
 	for idx, s := range map[string]string{"branch": meta.Repository.Branch, "commit": meta.HeadCommit.ID, "provider": meta.Repository.Provider} {
 		if len(s) < 1 {
-			return nil, fmt.Errorf("Metadata %s is empty", idx)
+			return nil, fmt.Errorf("metadata %s is empty", idx)
 		}
 	}
 
@@ -72,7 +68,7 @@ func DVKey(publicKey []byte) Option {
 }
 
 func New(config *Config, options ...Option) (ifaces.Compiler, error) {
-	log, err := logfile.New()
+	log, err := os.CreateTemp("/tmp", "log-*")
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +141,7 @@ func (c *compiler) Build() error {
 	}
 
 	if c.config.project == nil {
-		return tee("[Build]", errors.New("No project found"))
+		return tee("[Build]", errors.New("no project found"))
 	}
 
 	getter := c.config.project.Get()

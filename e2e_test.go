@@ -10,16 +10,15 @@ import (
 	"testing"
 	"time"
 
-	commonTest "bitbucket.org/taubyte/dreamland-test/common"
-	gitTest "bitbucket.org/taubyte/dreamland-test/git"
 	"github.com/taubyte/config-compiler/compile"
 	"github.com/taubyte/config-compiler/decompile"
+	commonTest "github.com/taubyte/dreamland/helpers"
+	gitTest "github.com/taubyte/dreamland/helpers/git"
 
-	commonDreamland "bitbucket.org/taubyte/dreamland/common"
-	dreamland "bitbucket.org/taubyte/dreamland/services"
+	commonDreamland "github.com/taubyte/dreamland/core/common"
+	dreamland "github.com/taubyte/dreamland/core/services"
 	commonIface "github.com/taubyte/go-interfaces/common"
 
-	_ "bitbucket.org/taubyte/tns-p2p-client"
 	"github.com/spf13/afero"
 	tnsIface "github.com/taubyte/go-interfaces/services/tns"
 	projectLib "github.com/taubyte/go-project-schema/project"
@@ -27,6 +26,7 @@ import (
 	librarySpec "github.com/taubyte/go-specs/library"
 	specs "github.com/taubyte/go-specs/methods"
 	websiteSpec "github.com/taubyte/go-specs/website"
+	_ "github.com/taubyte/odo/clients/p2p/tns"
 )
 
 func TestClone(t *testing.T) {

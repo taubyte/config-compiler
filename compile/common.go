@@ -57,9 +57,9 @@ func getDomIDs(domains []string, application string, project projectSchema.Proje
 				domID := domIface.Get().Id()
 				if err2 != nil || domID == "" {
 					if domID == "" {
-						err1 = fmt.Errorf("Domain not found")
+						err1 = fmt.Errorf("domain not found")
 					}
-					return domIDs, fmt.Errorf("Problems finding domain( %s ) %v  //  %v", dom, err1, err2)
+					return domIDs, fmt.Errorf("problems finding domain( %s ) %v  //  %v", dom, err1, err2)
 				}
 			}
 			domIDs = append(domIDs, domIface.Get().Id())
@@ -86,7 +86,7 @@ func getSmartOpsFromTags(tags []string, application string, project projectSchem
 					if err1 == nil {
 						err1 = fmt.Errorf("SmartOp not found")
 					}
-					return opIDs, fmt.Errorf("Failed finding smartOp( %s ) %v", tag, err1)
+					return opIDs, fmt.Errorf("failed finding smartOp( %s ) %v", tag, err1)
 				}
 
 				// Check for the smartOp globally
@@ -95,10 +95,10 @@ func getSmartOpsFromTags(tags []string, application string, project projectSchem
 				opIface, err2 = project.SmartOps(tag, "")
 				if err2 != nil || opIface.Get().Id() == "" {
 					if opIface.Get().Id() == "" {
-						err1 = fmt.Errorf("SmartOp not found")
+						err1 = fmt.Errorf("smartOp not found")
 					}
 
-					return opIDs, fmt.Errorf("Failed finding smartOp( %s ) %v  //  %v", tag, err1, err2)
+					return opIDs, fmt.Errorf("failed finding smartOp( %s ) %v  //  %v", tag, err1, err2)
 				}
 			}
 			opIDs = append(opIDs, opIface.Get().Id())
@@ -122,7 +122,7 @@ func getSmartOpsFromTags(tags []string, application string, project projectSchem
 			return opIDs, err
 		}
 		for _, smartOp := range libSmartOps {
-			if slices.Contains(opIDs, smartOp) == false {
+			if !slices.Contains(opIDs, smartOp) {
 				opIDs = append(opIDs, smartOp)
 			}
 		}
@@ -142,7 +142,7 @@ func getSmartOpsFromTags(tags []string, application string, project projectSchem
 		}
 
 		for _, smartOp := range appSmartOps {
-			if slices.Contains(opIDs, smartOp) == false {
+			if !slices.Contains(opIDs, smartOp) {
 				opIDs = append(opIDs, smartOp)
 			}
 		}

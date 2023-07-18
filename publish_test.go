@@ -5,16 +5,16 @@ import (
 	"reflect"
 	"testing"
 
-	commonDreamland "bitbucket.org/taubyte/dreamland/common"
-	"bitbucket.org/taubyte/dreamland/services"
 	"github.com/taubyte/config-compiler/compile"
 	testFixtures "github.com/taubyte/config-compiler/internal/fixtures"
+	commonDreamland "github.com/taubyte/dreamland/core/common"
+	"github.com/taubyte/dreamland/core/services"
 	commonIface "github.com/taubyte/go-interfaces/common"
 	projectSchema "github.com/taubyte/go-project-schema/project"
 	specs "github.com/taubyte/go-specs/methods"
 	"github.com/taubyte/utils/maps"
 
-	_ "bitbucket.org/taubyte/tns/service"
+	_ "github.com/taubyte/odo/protocols/tns/service"
 )
 
 func TestUpdate(t *testing.T) {

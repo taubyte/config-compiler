@@ -9,7 +9,7 @@ import (
 func domain(name string, application string, project projectSchema.Project) (_id string, returnMap map[string]interface{}, err error) {
 	iFace, err := project.Domain(name, application)
 	if err != nil {
-		return "", nil, fmt.Errorf("Opening Domain( %s/`%s` ) failed with: %v", application, name, err)
+		return "", nil, fmt.Errorf("opening Domain( %s/`%s` ) failed with: %v", application, name, err)
 	}
 
 	getter := iFace.Get()
@@ -30,7 +30,7 @@ func domain(name string, application string, project projectSchema.Project) (_id
 
 	err = attachSmartOpsFromTags(returnMap, _tags, application, project, "")
 	if err != nil {
-		return "", nil, fmt.Errorf("Domain( %s/`%s` ): Getting smartOps failed with: %v", application, name, err)
+		return "", nil, fmt.Errorf("domain( %s/`%s` ): Getting smartOps failed with: %v", application, name, err)
 	}
 
 	if getter.Type() == "inline" {

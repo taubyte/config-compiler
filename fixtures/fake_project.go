@@ -3,8 +3,8 @@ package fixtures
 import (
 	"fmt"
 
-	"bitbucket.org/taubyte/dreamland/common"
 	"github.com/taubyte/config-compiler/internal/fixtures"
+	"github.com/taubyte/dreamland/core/common"
 )
 
 func fakeProject(u common.Universe, params ...interface{}) error {

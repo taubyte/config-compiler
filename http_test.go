@@ -4,16 +4,16 @@ import (
 	"os"
 	"testing"
 
-	commonTest "bitbucket.org/taubyte/dreamland-test/common"
-	gitTest "bitbucket.org/taubyte/dreamland-test/git"
-	commonDreamland "bitbucket.org/taubyte/dreamland/common"
-	dreamland "bitbucket.org/taubyte/dreamland/services"
-	_ "bitbucket.org/taubyte/tns/service"
 	"github.com/taubyte/config-compiler/compile"
+	commonDreamland "github.com/taubyte/dreamland/core/common"
+	dreamland "github.com/taubyte/dreamland/core/services"
+	commonTest "github.com/taubyte/dreamland/helpers"
+	gitTest "github.com/taubyte/dreamland/helpers/git"
 	commonIface "github.com/taubyte/go-interfaces/common"
 	projectLib "github.com/taubyte/go-project-schema/project"
 	functionSpec "github.com/taubyte/go-specs/function"
 	websiteSpec "github.com/taubyte/go-specs/website"
+	_ "github.com/taubyte/odo/protocols/tns/service"
 )
 
 func TestHttp(t *testing.T) {
