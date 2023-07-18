@@ -1,0 +1,56 @@
+package decompile
+
+import (
+	"fmt"
+
+	"github.com/mitchellh/mapstructure"
+	"github.com/taubyte/config-compiler/common"
+	lib "github.com/taubyte/go-project-schema/functions"
+	projectLib "github.com/taubyte/go-project-schema/project"
+	librarySpec "github.com/taubyte/go-specs/library"
+	structureSpec "github.com/taubyte/go-specs/structure"
+)
+
+func function(project projectLib.Project, _id string, obj interface{}, appName string) error {
+	resource := &structureSpec.Function{}
+	mapstructure.Decode(obj, resource)
+
+	iFace, err := project.Function(resource.Name, appName)
+	if err != nil {
+		return fmt.Errorf("Open function `%s/%s` failed: %s", appName, resource.Name, err)
+	}
+
+	resource.SetId(_id)
+	return iFace.SetWithStruct(false, resource)
+}
+
+func function_clean(project projectLib.Project, name, app string) (err error) {
+	function, err := project.Function(name, app)
+	if err != nil {
+		return fmt.Errorf("Couldn't open function `%s/%s` to clean: %v", app, name, err)
+	}
+
+	oldSource := function.Get().Source()
+	if oldLib := common.LibraryFromSource(oldSource); len(oldLib) > 0 {
+		newLib, err := cleanLibs(project, oldLib, app)
+		if err != nil {
+			return fmt.Errorf("Clean libraries of function `%s/%s` failed with: %v", app, name, err)
+		}
+
+		err = function.Set(false, lib.Source(librarySpec.PathVariable.String()+"/"+newLib))
+	}
+
+	old_domains := function.Get().Domains()
+	new_domains, err := cleanDoms(project, old_domains, app)
+	if err != nil {
+		return fmt.Errorf("Clean domains of function `%s/%s` failed with: %v", app, name, err)
+	}
+
+	if len(new_domains) > 0 {
+		err = function.Set(false, lib.Domains(new_domains))
+		if err != nil {
+			return fmt.Errorf("Set domains of website `%s/%s` failed with: %v", app, name, err)
+		}
+	}
+	return
+}
