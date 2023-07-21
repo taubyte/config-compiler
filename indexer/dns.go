@@ -4,7 +4,6 @@ import (
 	_ "embed"
 
 	dv "github.com/taubyte/domain-validation"
-	commonIface "github.com/taubyte/go-interfaces/services/common"
 	domainSpec "github.com/taubyte/go-specs/domain"
 	"golang.org/x/exp/slices"
 )
@@ -27,10 +26,10 @@ func (ctx *IndexContext) validateDomain(fqdn string) error {
 	}
 
 	var err error
-	if commonIface.Deployment == commonIface.Odo {
-		err = domainSpec.ValidateDNS(ctx.ProjectId, fqdn, ctx.Dev, dv.PublicKey(ctx.DVPublicKey))
-	} else {
+	if ctx.Dev {
 		err = domainSpec.ValidateDNS(ctx.ProjectId, fqdn, ctx.Dev, dv.PublicKey(domainValPublicKeyData))
+	} else {
+		err = domainSpec.ValidateDNS(ctx.ProjectId, fqdn, ctx.Dev, dv.PublicKey(ctx.DVPublicKey))
 	}
 	if err != nil {
 		return err
