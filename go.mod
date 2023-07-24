@@ -2,16 +2,7 @@ module github.com/taubyte/config-compiler
 
 go 1.18
 
-replace (
-	github.com/taubyte/config-compiler => /home/tafkhan/Documents/Work/Taubyte/new/config-compiler
-	github.com/taubyte/dreamland => /home/tafkhan/Documents/Work/Taubyte/new/dreamland
-	github.com/taubyte/go-interfaces => /home/tafkhan/Documents/Work/Taubyte/Repos/go-interfaces
-	github.com/taubyte/http => /home/tafkhan/Documents/Work/Taubyte/Repos/http
-	github.com/taubyte/odo => /home/tafkhan/Documents/Work/Taubyte/new/odo
-	github.com/taubyte/p2p => /home/tafkhan/Documents/Work/Taubyte/new/p2p
-	github.com/taubyte/vm => /home/tafkhan/Documents/Work/Taubyte/Repos/vm
-	github.com/taubyte/vm-core-plugins => /home/tafkhan/Documents/Work/Taubyte/Repos/vm-core-plugins
-)
+replace github.com/taubyte/dreamland => /home/tafkhan/Documents/Work/Taubyte/new/dreamland
 
 require (
 	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137
@@ -20,10 +11,10 @@ require (
 	github.com/spf13/afero v1.9.5
 	github.com/taubyte/domain-validation v1.0.0
 	github.com/taubyte/dreamland v0.0.0-20230718183213-ba499b2adb43
-	github.com/taubyte/go-interfaces v0.2.4
+	github.com/taubyte/go-interfaces v0.2.6
 	github.com/taubyte/go-project-schema v0.9.3
 	github.com/taubyte/go-specs v0.10.5
-	github.com/taubyte/odo v0.0.0-20230718192043-44b80a389266
+	github.com/taubyte/odo v0.0.0-20230724195221-c163d3123d4f
 	github.com/taubyte/utils v0.1.6
 	golang.org/x/crypto v0.11.0
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
@@ -35,7 +26,6 @@ require (
 	atomicgo.dev/keyboard v0.2.9 // indirect
 	atomicgo.dev/schedule v0.0.2 // indirect
 	bitbucket.org/taubyte/go-moody-blues v0.1.34 // indirect
-	bitbucket.org/taubyte/p2p v0.8.2 // indirect
 	github.com/CAFxX/httpcompression v0.0.8 // indirect
 	github.com/DataDog/zstd v1.5.2 // indirect
 	github.com/Microsoft/go-winio v0.5.2 // indirect
@@ -191,8 +181,8 @@ require (
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/taubyte/go-seer v1.0.6 // indirect
 	github.com/taubyte/go-simple-git v0.2.5 // indirect
-	github.com/taubyte/http v0.10.2 // indirect
-	github.com/taubyte/p2p v0.9.0 // indirect
+	github.com/taubyte/http v0.10.3 // indirect
+	github.com/taubyte/p2p v0.9.1 // indirect
 	github.com/unrolled/secure v1.13.0 // indirect
 	github.com/whyrusleeping/cbor-gen v0.0.0-20230126041949-52956bd4c9aa // indirect
 	github.com/whyrusleeping/chunker v0.0.0-20181014151217-fe64bd25879f // indirect
