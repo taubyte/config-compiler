@@ -2,19 +2,17 @@ module github.com/taubyte/config-compiler
 
 go 1.18
 
-replace github.com/taubyte/dreamland => /home/tafkhan/Documents/Work/Taubyte/new/dreamland
-
 require (
 	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137
 	github.com/google/go-github/v32 v32.1.0
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/spf13/afero v1.9.5
 	github.com/taubyte/domain-validation v1.0.0
-	github.com/taubyte/dreamland v0.0.0-20230718183213-ba499b2adb43
+	github.com/taubyte/dreamland v0.4.2
 	github.com/taubyte/go-interfaces v0.2.6
 	github.com/taubyte/go-project-schema v0.9.3
 	github.com/taubyte/go-specs v0.10.5
-	github.com/taubyte/odo v0.0.0-20230724195221-c163d3123d4f
+	github.com/taubyte/odo v0.0.0-20230724195614-f30996c53092
 	github.com/taubyte/utils v0.1.6
 	golang.org/x/crypto v0.11.0
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
