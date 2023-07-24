@@ -14,7 +14,7 @@ import (
 	specs "github.com/taubyte/go-specs/methods"
 	"github.com/taubyte/utils/maps"
 
-	_ "github.com/taubyte/odo/protocols/tns/service"
+	_ "github.com/taubyte/odo/protocols/tns"
 )
 
 func TestUpdate(t *testing.T) {

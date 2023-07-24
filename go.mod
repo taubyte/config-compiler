@@ -2,6 +2,11 @@ module github.com/taubyte/config-compiler
 
 go 1.18
 
+replace github.com/taubyte/dreamland => /home/tafkhan/Documents/Work/Taubyte/new/dreamland
+replace github.com/taubyte/config-compiler => /home/tafkhan/Documents/Work/Taubyte/new/config-compiler
+replace github.com/taubyte/odo => /home/tafkhan/Documents/Work/Taubyte/new/odo
+replace github.com/taubyte/vm => /home/tafkhan/Documents/Work/Taubyte/Repos/vm
+
 require (
 	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137
 	github.com/google/go-github/v32 v32.1.0

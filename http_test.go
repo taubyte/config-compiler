@@ -13,7 +13,7 @@ import (
 	projectLib "github.com/taubyte/go-project-schema/project"
 	functionSpec "github.com/taubyte/go-specs/function"
 	websiteSpec "github.com/taubyte/go-specs/website"
-	_ "github.com/taubyte/odo/protocols/tns/service"
+	_ "github.com/taubyte/odo/protocols/tns"
 )
 
 func TestHttp(t *testing.T) {

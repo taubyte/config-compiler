@@ -7,7 +7,7 @@ import (
 	dreamland "github.com/taubyte/dreamland/core/services"
 	commonIface "github.com/taubyte/go-interfaces/common"
 	_ "github.com/taubyte/odo/clients/p2p/tns"
-	_ "github.com/taubyte/odo/protocols/tns/service"
+	_ "github.com/taubyte/odo/protocols/tns"
 )
 
 func TestFakeProject(t *testing.T) {
