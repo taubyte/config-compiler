@@ -2,6 +2,8 @@ module github.com/taubyte/config-compiler
 
 go 1.18
 
+replace github.com/taubyte/dreamland => /home/tafkhan/Documents/Work/Taubyte/new/dreamland
+
 require (
 	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137
 	github.com/google/go-github/v32 v32.1.0
@@ -9,10 +11,10 @@ require (
 	github.com/spf13/afero v1.9.5
 	github.com/taubyte/domain-validation v1.0.0
 	github.com/taubyte/dreamland v0.0.0-20230718183213-ba499b2adb43
-	github.com/taubyte/go-interfaces v0.2.4
+	github.com/taubyte/go-interfaces v0.2.6
 	github.com/taubyte/go-project-schema v0.9.3
 	github.com/taubyte/go-specs v0.10.5
-	github.com/taubyte/odo v0.0.0-20230718192043-44b80a389266
+	github.com/taubyte/odo v0.0.0-20230724195221-c163d3123d4f
 	github.com/taubyte/utils v0.1.6
 	golang.org/x/crypto v0.11.0
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
@@ -24,7 +26,6 @@ require (
 	atomicgo.dev/keyboard v0.2.9 // indirect
 	atomicgo.dev/schedule v0.0.2 // indirect
 	bitbucket.org/taubyte/go-moody-blues v0.1.34 // indirect
-	bitbucket.org/taubyte/p2p v0.8.2 // indirect
 	github.com/CAFxX/httpcompression v0.0.8 // indirect
 	github.com/DataDog/zstd v1.5.2 // indirect
 	github.com/Microsoft/go-winio v0.5.2 // indirect
@@ -43,7 +44,6 @@ require (
 	github.com/containerd/cgroups v1.1.0 // indirect
 	github.com/containerd/console v1.0.3 // indirect
 	github.com/coreos/go-systemd/v22 v22.5.0 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/crackcomm/go-gitignore v0.0.0-20170627025303-887ab5e44cc3 // indirect
 	github.com/cskr/pubsub v1.0.2 // indirect
 	github.com/davidlazar/go-crypto v0.0.0-20200604182044-b73af7476f6c // indirect
@@ -176,16 +176,14 @@ require (
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.11.0 // indirect
 	github.com/rs/cors v1.8.3 // indirect
-	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/smartystreets/assertions v1.13.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/taubyte/go-doci v1.0.2 // indirect
 	github.com/taubyte/go-seer v1.0.6 // indirect
 	github.com/taubyte/go-simple-git v0.2.5 // indirect
-	github.com/taubyte/http v0.10.1 // indirect
+	github.com/taubyte/http v0.10.3 // indirect
+	github.com/taubyte/p2p v0.9.1 // indirect
 	github.com/unrolled/secure v1.13.0 // indirect
-	github.com/urfave/cli/v2 v2.25.7 // indirect
 	github.com/whyrusleeping/cbor-gen v0.0.0-20230126041949-52956bd4c9aa // indirect
 	github.com/whyrusleeping/chunker v0.0.0-20181014151217-fe64bd25879f // indirect
 	github.com/whyrusleeping/go-keyspace v0.0.0-20160322163242-5b898ac5add1 // indirect
@@ -193,7 +191,6 @@ require (
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/xanzy/ssh-agent v0.3.1 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
-	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/otel v1.14.0 // indirect
 	go.opentelemetry.io/otel/trace v1.14.0 // indirect
