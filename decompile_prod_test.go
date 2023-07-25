@@ -15,7 +15,7 @@ import (
 	projectLib "github.com/taubyte/go-project-schema/project"
 	specs "github.com/taubyte/go-specs/methods"
 	_ "github.com/taubyte/odo/clients/p2p/tns"
-	_ "github.com/taubyte/odo/protocols/tns/service"
+	_ "github.com/taubyte/odo/protocols/tns"
 	"github.com/taubyte/utils/maps"
 )
 
