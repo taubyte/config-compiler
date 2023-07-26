@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"reflect"
-	"strings"
 	"testing"
 	"time"
 
@@ -279,24 +278,20 @@ func TestE2E(t *testing.T) {
 			fakeMeta.HeadCommit.ID,
 		),
 	)
+	if err != nil {
+		t.Error(err)
+		return
+	}
 	if new_obj == nil {
 		t.Error("NO OBJECT FETCHED")
 		return
 	}
 
 	// expect keys
-	magicKeys, err := tns.Lookup(tnsIface.Query{Prefix: []string{"repositories"}, RegEx: false})
+	_, err = tns.Lookup(tnsIface.Query{Prefix: []string{"repositories"}, RegEx: false})
 	if err != nil {
 		t.Errorf("fetch keys failed with err: %s", err.Error())
 		return
-	}
-
-	// Here we're removing the keys with /resource
-	typeKeys := make([]string, 0)
-	for _, s := range magicKeys.([]string) {
-		if strings.Contains(s, "/type") {
-			typeKeys = append(typeKeys, s)
-		}
 	}
 
 	// decompile

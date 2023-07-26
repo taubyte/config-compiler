@@ -76,6 +76,11 @@ func TestIndexer(t *testing.T) {
 	}
 
 	resp, err := simple.TNS().Lookup(tns.Query{Prefix: []string{"domains"}, RegEx: false})
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
 	_map := make(map[string]interface{})
 	_map["test"] = resp
 	list, err := maps.StringArray(_map, "test")
