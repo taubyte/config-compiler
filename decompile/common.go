@@ -8,13 +8,6 @@ import (
 	projectLib "github.com/taubyte/go-project-schema/project"
 )
 
-// the cache is to hold attributes that need to be set together
-var cache = make(map[string]interface{}, 0)
-
-func cleanCache() {
-	cache = make(map[string]interface{}, 0)
-}
-
 func (d *decompiler) cleanResources() (err error) {
 	getter := d.project.Get()
 	for _, app := range getter.Applications() {
@@ -62,9 +55,9 @@ func cleanLibs(project projectLib.Project, id string, app string) (string, error
 	lib, err := libById(project, id, app)
 	if err != nil || lib.Get().Id() == "" {
 		if err != nil {
-			return "", fmt.Errorf("Library id:`%s` not found: %v", id, err)
+			return "", fmt.Errorf("library id:`%s` not found: %v", id, err)
 		}
-		return "", fmt.Errorf("Library id:`%s` not found", id)
+		return "", fmt.Errorf("library id:`%s` not found", id)
 	}
 
 	return lib.Get().Name(), nil
@@ -85,7 +78,7 @@ func libById(project projectLib.Project, _id string, app string) (_lib libraryLi
 			return
 		}
 	}
-	return _lib, fmt.Errorf("Library not found")
+	return _lib, fmt.Errorf("library not found")
 }
 
 func cleanDoms(project projectLib.Project, old_domains []string, app string) ([]string, error) {
@@ -94,9 +87,9 @@ func cleanDoms(project projectLib.Project, old_domains []string, app string) ([]
 		dom, err := domById(project, _id, app)
 		if err != nil || dom.Get().Id() == "" {
 			if err != nil {
-				return new_domains, fmt.Errorf("Domain id:`%s` not found: %v", _id, err)
+				return new_domains, fmt.Errorf("domain id:`%s` not found: %v", _id, err)
 			}
-			return new_domains, fmt.Errorf("Domain id:`%s` not found", _id)
+			return new_domains, fmt.Errorf("domain id:`%s` not found", _id)
 		}
 		new_domains = append(new_domains, dom.Get().Name())
 	}
@@ -118,5 +111,5 @@ func domById(project projectLib.Project, _id string, app string) (_dom domLib.Do
 			return
 		}
 	}
-	return _dom, fmt.Errorf("Domain not found")
+	return _dom, fmt.Errorf("domain not found")
 }

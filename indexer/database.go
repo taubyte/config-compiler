@@ -9,14 +9,6 @@ import (
 	"github.com/taubyte/utils/maps"
 )
 
-//TODO
-/*
-i := main.IndexContext(...)
-
-err = i.Databases()
-
-Could do this for all
-*/
 func Databases(ctx *IndexContext, project projectSchema.Project, urlIndex map[string]interface{}) error {
 	if urlIndex == nil {
 		return errors.New("urlIndex received is nil")

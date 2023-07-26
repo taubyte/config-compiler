@@ -22,7 +22,7 @@ func magic(f magicFunc, project projectLib.Project, obj interface{}, appName str
 
 	rValue := reflect.ValueOf(obj)
 	if rValue.Kind() != reflect.Map {
-		return fmt.Errorf("Object is not a map:  `%s`(%T), %#v", rValue.Type().Name(), obj, rValue)
+		return fmt.Errorf("object is not a map:  `%s`(%T), %#v", rValue.Type().Name(), obj, rValue)
 	}
 
 	for _, key := range rValue.MapKeys() {
@@ -53,8 +53,8 @@ func (d *decompiler) resource(key string, data interface{}, appName string) erro
 	}
 
 	handler, exist := _router[key]
-	if exist == false {
-		return fmt.Errorf("Resource `%s` doesn't exist", key)
+	if !exist {
+		return fmt.Errorf("resource `%s` doesn't exist", key)
 	}
 
 	return magic(handler, d.project, data, appName)

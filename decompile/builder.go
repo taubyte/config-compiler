@@ -50,7 +50,7 @@ func (ctx *buildContext) newProject() (err error) {
 
 	err = os.MkdirAll(ctx.dir, 0777)
 	if err != nil {
-		return fmt.Errorf("Creating tx.dir %s failed with: %v", ctx.dir, err)
+		return fmt.Errorf("creating tx.dir %s failed with: %v", ctx.dir, err)
 	}
 
 	ctx.project, err = project.Open(project.SystemFS(ctx.dir))
@@ -80,34 +80,25 @@ func (ctx *buildContext) newStructs(ifaces ...interface{}) (err error) {
 }
 
 func (ctx *buildContext) newStruct(iface interface{}) (err error) {
-	switch iface.(type) {
+	switch v := iface.(type) {
 	case *structureSpec.Function:
-		_iface := iface.(*structureSpec.Function)
-		return function(ctx.project, generateId(_iface.Id), iface, "")
+		return function(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.Messaging:
-		_iface := iface.(*structureSpec.Messaging)
-		return messaging(ctx.project, generateId(_iface.Id), iface, "")
+		return messaging(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.Domain:
-		_iface := iface.(*structureSpec.Domain)
-		return domain(ctx.project, generateId(_iface.Id), iface, "")
+		return domain(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.Database:
-		_iface := iface.(*structureSpec.Database)
-		return database(ctx.project, generateId(_iface.Id), iface, "")
+		return database(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.Storage:
-		_iface := iface.(*structureSpec.Storage)
-		return storage(ctx.project, generateId(_iface.Id), iface, "")
+		return storage(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.Service:
-		_iface := iface.(*structureSpec.Service)
-		return service(ctx.project, generateId(_iface.Id), iface, "")
+		return service(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.Library:
-		_iface := iface.(*structureSpec.Library)
-		return library(ctx.project, generateId(_iface.Id), iface, "")
+		return library(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.SmartOp:
-		_iface := iface.(*structureSpec.SmartOp)
-		return smartop(ctx.project, generateId(_iface.Id), iface, "")
+		return smartop(ctx.project, generateId(v.Id), iface, "")
 	case *structureSpec.Website:
-		_iface := iface.(*structureSpec.Website)
-		return website(ctx.project, generateId(_iface.Id), iface, "")
+		return website(ctx.project, generateId(v.Id), iface, "")
 	case []interface{}:
 		for _, _iface := range iface.([]interface{}) {
 			err = ctx.newStruct(_iface)

@@ -14,7 +14,7 @@ func library(project projectLib.Project, _id string, obj interface{}, appName st
 
 	iFace, err := project.Library(resource.Name, appName)
 	if err != nil {
-		return fmt.Errorf("Open library `%s/%s` failed: %s", appName, resource.Name, err)
+		return fmt.Errorf("open library `%s/%s` failed: %s", appName, resource.Name, err)
 	}
 
 	resource.SetId(_id)

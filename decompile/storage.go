@@ -14,7 +14,7 @@ func storage(project projectLib.Project, _id string, obj interface{}, appName st
 
 	iFace, err := project.Storage(resource.Name, appName)
 	if err != nil {
-		return fmt.Errorf("Open storage `%s/%s` failed: %s", appName, resource.Name, err)
+		return fmt.Errorf("open storage `%s/%s` failed: %s", appName, resource.Name, err)
 	}
 
 	resource.SetId(_id)

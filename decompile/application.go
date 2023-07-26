@@ -28,7 +28,7 @@ func (d *decompiler) application(_id string, obj interface{}) error {
 
 	rValue := reflect.ValueOf(obj)
 	if rValue.Kind() != reflect.Map {
-		return fmt.Errorf("Application Object `%s`, not a map: %#v", rValue.Kind(), rValue)
+		return fmt.Errorf("application Object `%s`, not a map: %#v", rValue.Kind(), rValue)
 	}
 
 	for _, key := range rValue.MapKeys() {
@@ -40,7 +40,7 @@ func (d *decompiler) application(_id string, obj interface{}) error {
 		case "id", "name", "description", "tags":
 		default:
 			if data.Kind() != reflect.Map {
-				return fmt.Errorf("Resource object is `%s`, not a map: %#v", data.Kind(), data)
+				return fmt.Errorf("resource object is `%s`, not a map: %#v", data.Kind(), data)
 			}
 			err = d.resource(key.String(), data.Interface(), appO.Name)
 		}

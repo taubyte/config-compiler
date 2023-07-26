@@ -17,7 +17,7 @@ func function(project projectLib.Project, _id string, obj interface{}, appName s
 
 	iFace, err := project.Function(resource.Name, appName)
 	if err != nil {
-		return fmt.Errorf("Open function `%s/%s` failed: %s", appName, resource.Name, err)
+		return fmt.Errorf("open function `%s/%s` failed: %s", appName, resource.Name, err)
 	}
 
 	resource.SetId(_id)
@@ -27,29 +27,31 @@ func function(project projectLib.Project, _id string, obj interface{}, appName s
 func function_clean(project projectLib.Project, name, app string) (err error) {
 	function, err := project.Function(name, app)
 	if err != nil {
-		return fmt.Errorf("Couldn't open function `%s/%s` to clean: %v", app, name, err)
+		return fmt.Errorf("couldn't open function `%s/%s` to clean: %v", app, name, err)
 	}
 
 	oldSource := function.Get().Source()
 	if oldLib := common.LibraryFromSource(oldSource); len(oldLib) > 0 {
 		newLib, err := cleanLibs(project, oldLib, app)
 		if err != nil {
-			return fmt.Errorf("Clean libraries of function `%s/%s` failed with: %v", app, name, err)
+			return fmt.Errorf("clean libraries of function `%s/%s` failed with: %v", app, name, err)
 		}
 
-		err = function.Set(false, lib.Source(librarySpec.PathVariable.String()+"/"+newLib))
+		if err = function.Set(false, lib.Source(librarySpec.PathVariable.String()+"/"+newLib)); err != nil {
+			return fmt.Errorf("set libraries of function  `%s`%s` failed with: %w", app, name, err)
+		}
 	}
 
 	old_domains := function.Get().Domains()
 	new_domains, err := cleanDoms(project, old_domains, app)
 	if err != nil {
-		return fmt.Errorf("Clean domains of function `%s/%s` failed with: %v", app, name, err)
+		return fmt.Errorf("clean domains of function `%s/%s` failed with: %v", app, name, err)
 	}
 
 	if len(new_domains) > 0 {
 		err = function.Set(false, lib.Domains(new_domains))
 		if err != nil {
-			return fmt.Errorf("Set domains of website `%s/%s` failed with: %v", app, name, err)
+			return fmt.Errorf("set domains of website `%s/%s` failed with: %v", app, name, err)
 		}
 	}
 	return

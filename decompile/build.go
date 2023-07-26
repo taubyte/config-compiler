@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"reflect"
 
-	projectSchema "github.com/taubyte/go-project-schema/project"
-
 	"github.com/spf13/afero"
 	projectLib "github.com/taubyte/go-project-schema/project"
 )
@@ -13,9 +11,8 @@ import (
 type Option func(d *decompiler) error
 
 type decompiler struct {
-	project projectSchema.Project
+	project projectLib.Project
 	object  interface{}
-	opts    []func(d *decompiler)
 }
 
 func New(fs afero.Fs, obj interface{}, options ...Option) (d *decompiler, err error) {
@@ -36,11 +33,10 @@ func New(fs afero.Fs, obj interface{}, options ...Option) (d *decompiler, err er
 }
 
 func (d *decompiler) Build() (projectLib.Project, error) {
-	defer cleanCache()
 	// Get all resources
 	rValue := reflect.ValueOf(d.object)
 	if rValue.Kind() != reflect.Map {
-		return nil, fmt.Errorf("Object is not a map")
+		return nil, fmt.Errorf("object is not a map")
 	}
 	for _, key := range rValue.MapKeys() {
 		rData := rValue.MapIndex(key).Elem()
@@ -59,7 +55,7 @@ func (d *decompiler) Build() (projectLib.Project, error) {
 			err = d.project.Set(false, projectLib.Email(rData.String()))
 		case "applications":
 			if rData.Kind() != reflect.Map {
-				return nil, fmt.Errorf("Application object is `%s`, not a map: %#v", rData.Kind(), rData)
+				return nil, fmt.Errorf("application object is `%s`, not a map: %#v", rData.Kind(), rData)
 			}
 			for _, _key := range rData.MapKeys() {
 				_rData := rData.MapIndex(_key).Elem()
@@ -82,13 +78,13 @@ func (d *decompiler) Build() (projectLib.Project, error) {
 
 	err := d.cleanResources()
 	if err != nil {
-		return nil, fmt.Errorf("Cleaning failed with: %v", err)
+		return nil, fmt.Errorf("cleaning failed with: %v", err)
 	}
 
 	// Sync
 	err = d.project.Set(true)
 	if err != nil {
-		return nil, fmt.Errorf("Sync failed with: %v", err)
+		return nil, fmt.Errorf("sync failed with: %v", err)
 	}
 
 	return d.project, nil

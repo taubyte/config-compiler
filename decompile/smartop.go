@@ -14,7 +14,7 @@ func smartop(project projectLib.Project, _id string, obj interface{}, appName st
 
 	iFace, err := project.SmartOps(resource.Name, appName)
 	if err != nil {
-		return fmt.Errorf("Open smart-op `%s/%s` failed: %s", appName, resource.Name, err)
+		return fmt.Errorf("open smart-op `%s/%s` failed: %s", appName, resource.Name, err)
 	}
 
 	resource.SetId(_id)

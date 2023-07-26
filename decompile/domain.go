@@ -14,7 +14,7 @@ func domain(project projectLib.Project, _id string, obj interface{}, appName str
 
 	iFace, err := project.Domain(resource.Name, appName)
 	if err != nil {
-		return fmt.Errorf("Open domain `%s/%s` failed: %s", appName, resource.Name, err)
+		return fmt.Errorf("open domain `%s/%s` failed: %s", appName, resource.Name, err)
 	}
 
 	resource.SetId(_id)

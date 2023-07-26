@@ -14,7 +14,7 @@ func service(project projectLib.Project, _id string, obj interface{}, appName st
 
 	iFace, err := project.Service(resource.Name, appName)
 	if err != nil {
-		return fmt.Errorf("Open service `%s/%s` failed: %s", appName, resource.Name, err)
+		return fmt.Errorf("open service `%s/%s` failed: %s", appName, resource.Name, err)
 	}
 
 	resource.SetId(_id)

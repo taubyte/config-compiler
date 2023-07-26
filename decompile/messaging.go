@@ -14,7 +14,7 @@ func messaging(project projectLib.Project, _id string, obj interface{}, appName 
 
 	iFace, err := project.Messaging(resource.Name, appName)
 	if err != nil {
-		return fmt.Errorf("Open messaging `%s/%s` failed: %s", appName, resource.Name, err)
+		return fmt.Errorf("open messaging `%s/%s` failed: %s", appName, resource.Name, err)
 	}
 
 	resource.SetId(_id)
