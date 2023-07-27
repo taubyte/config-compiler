@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/taubyte/config-compiler/internal/fixtures"
+	"github.com/taubyte/config-compiler/fixtures"
 	"github.com/taubyte/go-project-schema/application"
 	"github.com/taubyte/go-project-schema/libraries"
 	"github.com/taubyte/go-project-schema/smartops"
