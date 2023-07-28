@@ -48,7 +48,7 @@ func (ctx *buildContext) newProject() (err error) {
 		}
 	}
 
-	err = os.MkdirAll(ctx.dir, 0777)
+	err = os.MkdirAll(ctx.dir, 0750)
 	if err != nil {
 		return fmt.Errorf("creating tx.dir %s failed with: %v", ctx.dir, err)
 	}

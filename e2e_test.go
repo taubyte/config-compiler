@@ -228,8 +228,7 @@ func TestNoTNS(t *testing.T) {
 }
 
 func cloneConfig(ctx context.Context, url, root string) error {
-	gitToken := os.Getenv("TEST_GIT_TOKEN")
-	if _, err := git.New(ctx, git.URL(url), git.Token(gitToken), git.Root(root)); err != nil {
+	if _, err := git.New(ctx, git.URL(url), git.Root(root)); err != nil {
 		return err
 	}
 

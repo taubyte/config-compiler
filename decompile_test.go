@@ -29,7 +29,7 @@ func TestDecompileBasic(t *testing.T) {
 	}
 
 	gitRootConfig := gitRoot + "/config"
-	os.MkdirAll(gitRootConfig, 0777)
+	os.MkdirAll(gitRootConfig, 0750)
 
 	decompiler, err := decompile.New(afero.NewBasePathFs(afero.NewOsFs(), gitRootConfig), createdProjectObject)
 	if err != nil {
