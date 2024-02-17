@@ -1,6 +1,7 @@
 package indexer
 
 import (
+	"regexp"
 	"sync"
 
 	"github.com/taubyte/go-project-schema/domains"
@@ -21,7 +22,10 @@ type IndexContext struct {
 	ProjectId string
 	Branch    string
 	Commit    string
-	Obj       map[string]interface{}
+
+	GeneratedDomainRegExp *regexp.Regexp
+
+	Obj map[string]interface{}
 
 	Dev bool
 

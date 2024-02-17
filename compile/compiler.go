@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"regexp"
 	"strconv"
 
 	"github.com/spf13/afero"
+	"github.com/taubyte/config-compiler/common"
 	"github.com/taubyte/config-compiler/decompile"
 	"github.com/taubyte/config-compiler/ifaces"
 	"github.com/taubyte/config-compiler/indexer"
@@ -20,22 +22,14 @@ type compiler struct {
 	index  map[string]interface{}
 	post   []func() (err error)
 	log    *os.File
-	config *Config
+	config *common.Config
 
 	dev bool
 }
 
 type Option func(*compiler) error
 
-type Config struct {
-	Branch       string
-	Commit       string
-	Provider     string
-	RepositoryId string
-	project      projectSchema.Project
-}
-
-func CompilerConfig(project projectSchema.Project, meta patrick.Meta) (*Config, error) {
+func CompilerConfig(project projectSchema.Project, meta patrick.Meta, generatedDomainRegExp *regexp.Regexp) (*common.Config, error) {
 	if project == nil {
 		return nil, errors.New("project is nil")
 	}
@@ -50,7 +44,7 @@ func CompilerConfig(project projectSchema.Project, meta patrick.Meta) (*Config, 
 		}
 	}
 
-	return &Config{project: project, Branch: meta.Repository.Branch, Commit: meta.HeadCommit.ID, Provider: meta.Repository.Provider, RepositoryId: strconv.Itoa(meta.Repository.ID)}, nil
+	return &common.Config{Project: project, Branch: meta.Repository.Branch, Commit: meta.HeadCommit.ID, Provider: meta.Repository.Provider, RepositoryId: strconv.Itoa(meta.Repository.ID), GeneratedDomainRegExp: generatedDomainRegExp}, nil
 }
 
 func Dev() Option {
@@ -67,7 +61,7 @@ func DVKey(publicKey []byte) Option {
 	}
 }
 
-func New(config *Config, options ...Option) (ifaces.Compiler, error) {
+func New(config *common.Config, options ...Option) (ifaces.Compiler, error) {
 	log, err := os.CreateTemp("/tmp", "log-*")
 	if err != nil {
 		return nil, err
@@ -128,7 +122,7 @@ func (c *compiler) Load(object map[string]interface{}) error {
 		return err
 	}
 
-	c.config.project = prj
+	c.config.Project = prj
 
 	return nil
 }
@@ -140,11 +134,11 @@ func (c *compiler) Build() error {
 		return err
 	}
 
-	if c.config.project == nil {
+	if c.config.Project == nil {
 		return tee("[Build]", errors.New("no project found"))
 	}
 
-	getter := c.config.project.Get()
+	getter := c.config.Project.Get()
 
 	c.ctx.Branch = c.config.Branch
 	c.ctx.Commit = c.config.Commit
@@ -157,8 +151,9 @@ func (c *compiler) Build() error {
 		"email":       getter.Email(),
 	}
 	c.ctx.Dev = c.dev
+	c.ctx.GeneratedDomainRegExp = c.config.GeneratedDomainRegExp
 
-	for _type, iFace := range compilationGroup(c.config.project) {
+	for _type, iFace := range compilationGroup(c.config.Project) {
 		_, global := iFace.Get("")
 		if len(global) > 0 {
 			c.ctx.Obj[_type], err = c.magic(global, "", iFace.Compile)

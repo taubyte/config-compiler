@@ -1,16 +1,16 @@
 module github.com/taubyte/config-compiler
 
-go 1.18
+go 1.19
 
 require (
 	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/spf13/afero v1.9.5
-	github.com/taubyte/domain-validation v1.0.0
+	github.com/taubyte/domain-validation v1.0.1
 	github.com/taubyte/go-interfaces v0.2.9
 	github.com/taubyte/go-project-schema v0.9.3
 	github.com/taubyte/go-simple-git v0.2.5
-	github.com/taubyte/go-specs v0.10.5
+	github.com/taubyte/go-specs v0.10.8
 	github.com/taubyte/utils v0.1.6
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
 	gotest.tools/v3 v3.4.0

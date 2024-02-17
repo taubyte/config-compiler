@@ -17,14 +17,14 @@ import (
 )
 
 func (c *compiler) indexer(ctx *indexer.IndexContext, f indexerFunc) error {
-	return f(ctx, c.config.project, c.index)
+	return f(ctx, c.config.Project, c.index)
 }
 
 func (c *compiler) magic(list []string, app string, f magicFunc) (map[string]interface{}, error) {
 	returnMap := make(map[string]interface{}, len(list))
 	for _, name := range list {
 		fmt.Fprintf(c.log, "[Build|%s] Compiling %s\n", name, app)
-		_id, Object, err := f(name, app, c.config.project)
+		_id, Object, err := f(name, app, c.config.Project)
 		if err != nil {
 			fmt.Fprintf(c.log, "[Build|%s] failed with %s\n", name, err.Error())
 			return returnMap, err
