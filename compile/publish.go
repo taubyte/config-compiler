@@ -19,7 +19,7 @@ func (c *compiler) Publish(tns tnsIface.Client) (err error) {
 		return fmt.Errorf("publish index failed with: %w", err)
 	}
 
-	project := c.config.project.Get().Id()
+	project := c.config.Project.Get().Id()
 
 	prefix := specs.ProjectPrefix(project, c.ctx.Branch, c.ctx.Commit)
 	err = tns.Push(prefix.Slice(), c.ctx.Obj)

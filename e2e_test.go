@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"regexp"
 	"testing"
 	"time"
 
@@ -33,6 +34,8 @@ var fakeMeta = patrick.Meta{
 
 const configRepo = "https://github.com/taubyte-test/tb_testproject"
 
+var generatedDomainRegExp = regexp.MustCompile(`^[^.]+\.g\.tau\.link$`)
+
 func TestCompile(t *testing.T) {
 	project, err := fixtures.Project()
 	if err != nil {
@@ -40,7 +43,7 @@ func TestCompile(t *testing.T) {
 		return
 	}
 
-	rc, err := compile.CompilerConfig(project, fakeMeta)
+	rc, err := compile.CompilerConfig(project, fakeMeta, generatedDomainRegExp)
 	if err != nil {
 		t.Error(err)
 		return
@@ -112,7 +115,7 @@ func TestFromCloneCompile(t *testing.T) {
 		return
 	}
 
-	rc, err := compile.CompilerConfig(project, fakeMeta)
+	rc, err := compile.CompilerConfig(project, fakeMeta, generatedDomainRegExp)
 	if err != nil {
 		t.Error(err)
 		return
@@ -154,7 +157,7 @@ func TestNoTNS(t *testing.T) {
 		return
 	}
 
-	rc, err := compile.CompilerConfig(projectIface, fakeMeta)
+	rc, err := compile.CompilerConfig(projectIface, fakeMeta, generatedDomainRegExp)
 	if err != nil {
 		t.Error(err)
 		return
@@ -187,7 +190,7 @@ func TestNoTNS(t *testing.T) {
 		return
 	}
 
-	rc, err = compile.CompilerConfig(decompiledIface, fakeMeta)
+	rc, err = compile.CompilerConfig(decompiledIface, fakeMeta, generatedDomainRegExp)
 	if err != nil {
 		t.Error(err)
 		return

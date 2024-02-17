@@ -27,9 +27,9 @@ func (ctx *IndexContext) validateDomain(fqdn string) error {
 
 	var err error
 	if ctx.Dev {
-		err = domainSpec.ValidateDNS(ctx.ProjectId, fqdn, ctx.Dev, dv.PublicKey(domainValPublicKeyData))
+		err = domainSpec.ValidateDNS(ctx.GeneratedDomainRegExp, ctx.ProjectId, fqdn, ctx.Dev, dv.PublicKey(domainValPublicKeyData))
 	} else {
-		err = domainSpec.ValidateDNS(ctx.ProjectId, fqdn, ctx.Dev, dv.PublicKey(ctx.DVPublicKey))
+		err = domainSpec.ValidateDNS(ctx.GeneratedDomainRegExp, ctx.ProjectId, fqdn, ctx.Dev, dv.PublicKey(ctx.DVPublicKey))
 	}
 	if err != nil {
 		return err

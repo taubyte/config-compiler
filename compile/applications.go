@@ -5,7 +5,7 @@ import (
 )
 
 func (c *compiler) application(name string) (appID string, appObject map[string]interface{}, err error) {
-	app, err := c.config.project.Application(name)
+	app, err := c.config.Project.Application(name)
 	if err != nil {
 		return
 	}
@@ -25,15 +25,16 @@ func (c *compiler) application(name string) (appID string, appObject map[string]
 	}
 
 	ctx := &indexer.IndexContext{
-		AppId:     appID,
-		AppName:   name,
-		Branch:    c.ctx.Branch,
-		ProjectId: c.ctx.ProjectId,
-		Commit:    c.ctx.Commit,
-		Obj:       appObject,
-		Dev:       c.dev,
+		AppId:                 appID,
+		AppName:               name,
+		Branch:                c.ctx.Branch,
+		ProjectId:             c.ctx.ProjectId,
+		Commit:                c.ctx.Commit,
+		Obj:                   appObject,
+		Dev:                   c.dev,
+		GeneratedDomainRegExp: c.config.GeneratedDomainRegExp,
 	}
-	for _type, iFace := range compilationGroup(c.config.project) {
+	for _type, iFace := range compilationGroup(c.config.Project) {
 		local, _ := iFace.Get(name)
 		if len(local) > 0 {
 			appObject[_type], err = c.magic(local, name, iFace.Compile)
